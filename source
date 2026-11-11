@@ -61130,6 +61130,8 @@ interface <dfn interface>HTMLSelectedContentElement</dfn> : <span>HTMLElement</s
     <p>then return.</p>
    </li>
 
+   <li><p>Let <var>oldFormOwner</var> be <var>element</var>'s <span>form owner</span>.</p></li>
+
    <li><p>Set <var>element</var>'s <span>form owner</span> to null.</p></li>
 
    <li>
@@ -61150,6 +61152,12 @@ interface <dfn interface>HTMLSelectedContentElement</dfn> : <span>HTMLElement</s
    <li><p>Otherwise, if <var>element</var> has an ancestor <code>form</code> element, then <span
    data-x="concept-form-association">associate</span> <var>element</var> with the nearest such
    ancestor <code>form</code> element.</p></li>
+
+   <li><p>If <var>element</var> is a <span>form-associated custom element</span> and
+   <var>element</var>'s <span>form owner</span> is not <var>oldFormOwner</var>, then <span>enqueue a
+   custom element callback reaction</span> with <var>element</var>, callback name "<code
+   data-x="">formAssociatedCallback</code>", and « <var>element</var>'s <span>form owner</span>
+   ».</p></li>
   </ol>
   </div>
 
@@ -79651,11 +79659,7 @@ customElements.define("x-foo", class extends HTMLElement {
    <li>
     <p>If <var>element</var> is a <span>form-associated custom element</span>:</p>
     <ol>
-     <li><p><span>Reset the form owner</span> of <var>element</var>. If <var>element</var> is
-     associated with a <code>form</code> element, then
-     <span>enqueue a custom element callback reaction</span> with <var>element</var>, callback
-     name "<code data-x="">formAssociatedCallback</code>", and « the associated <code>form</code>
-     ».</p></li>
+     <li><p><span>Reset the form owner</span> of <var>element</var>.</p></li>
 
      <li><p>If <var>element</var> is <span data-x="concept-fe-disabled">disabled</span>, then
      <span>enqueue a custom element callback reaction</span> with <var>element</var>, callback name
